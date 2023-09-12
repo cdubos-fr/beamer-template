@@ -1,0 +1,51 @@
+\mode<presentation>
+
+\DeclareOptionBeamer{color}{\def\beamer@cdubos@color{#1}}
+\ExecuteOptionsBeamer{color=green}
+\ProcessOptionsBeamer
+
+
+
+\setbeamerfont{title}{size=\huge}
+\setbeamercolor{background canvas}{bg=cdubosdark}
+
+% Title page
+\defbeamertemplate*{title page}{cdubos}[1][]
+{%
+\vskip2em%
+\hbox{\leavevmode
+  \hskip-\Gm@lmargin\hbox{%
+      \setbox\beamer@tempbox=\hbox{
+        \begin{beamercolorbox}[center,sep=8pt,#1]{title page header}
+            \begin{minipage}{0.25\paperwidth}
+              \includegraphics[height=3em]{media/cdubos-logo.png}
+            \end{minipage}
+            \begin{minipage}{0.5\paperwidth}
+              \usebeamercolor[fg]{frametitle}\usebeamerfont{title}\textbf{\inserttitle}\par%
+            \end{minipage}
+            \begin{minipage}{0.1\paperwidth}
+              \includegraphics[height=3em]{media/python.png}
+            \end{minipage}
+        \end{beamercolorbox}%
+      }%
+    \beamer@tempdim=\ht\beamer@tempbox%
+    \advance\beamer@tempdim by 2pt%
+    \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+      \usebeamercolor{frametitle right}
+      \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+      \pgfusepath{clip}
+      \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+    \end{pgfpicture}
+    \hskip-\paperwidth%
+    \box\beamer@tempbox%
+    }%
+  \hskip-\Gm@rmargin%
+}%
+}
+
+
+
+
+\setbeamertemplate{enumerate items}[circle]
+
+\mode<all>

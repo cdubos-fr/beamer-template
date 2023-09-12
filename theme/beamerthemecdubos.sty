@@ -1,0 +1,43 @@
+
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+
+\DeclareOptionBeamer{color}{\def\beamer@cdubos@color{#1}}
+\ExecuteOptionsBeamer{color=green}
+\ProcessOptionsBeamer
+
+% Settings
+\useinnertheme[color=\beamer@cdubos@color]{cdubos}
+\useinnertheme{circles}
+\useoutertheme{cdubos}
+\usecolortheme[color=\beamer@cdubos@color]{cdubos}
+\usefonttheme{cdubos}
+
+
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{navigation symbols}{}
+
+\geometry{mag=2550,truedimen}
+
+\author{C. Dubos - \texttt{contact@cdubos.fr}}
+\date{\today}
+
+
+\AtBeginSection[]
+{
+    \begin{frame}{Sommaire}
+        \hfill
+        \parbox[t]{.8\textwidth}{
+            \begin{minipage}[c][0.25\textheight]{\textwidth}
+                \Large
+                \tableofcontents[currentsection,currentsubsection]
+            \end{minipage}
+        }
+    \end{frame}
+}
+
+
+
+\mode<all>

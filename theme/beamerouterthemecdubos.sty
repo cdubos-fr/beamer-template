@@ -1,0 +1,82 @@
+\mode<presentation>
+
+\ProcessOptionsBeamer
+
+\setbeamercolor*{author in head/foot}{fg=cduboslight}
+\setbeamercolor*{title in head/foot}{fg=cduboslight}
+\setbeamercolor*{date in head/foot}{fg=cduboslight}
+
+\setbeamercolor*{section in head/foot}{fg=cduboslight}
+\setbeamercolor*{subsection in head/foot}{fg=cduboslight}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]%
+
+\defbeamertemplate*{footline}{cdubos theme}
+{%
+  \leavevmode%
+  \hbox{%\if
+  \begin{beamercolorbox}[wd=.2222222\paperwidth,ht=2.25ex,dp=1ex,left,leftskip=1em]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.3333333\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=1em]{section in head/foot}%
+    \usebeamerfont{section in head/foot}\insertsection{}\expandafter\ifblank\expandafter{\subsecname}{}{ -> \insertsubsection}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.4444444\paperwidth,ht=2.25ex,dp=1ex,right,rightskip=1em]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}
+    \usebeamercolor[fg]{page number in head/foot}\usebeamerfont{page number in head/foot} - \usebeamertemplate{page number in head/foot}
+  \end{beamercolorbox}}%
+}
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
+  color(0pt)=(frametitle.bg);
+  color(\paperwidth)=(frametitle right.bg)}
+
+\AtBeginDocument{
+  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
+    color(0pt)=(bg);
+    color(4pt)=(black!50!bg)}
+}
+
+\defbeamertemplate*{frametitle}{cdubos theme}
+{%
+  \vskip0.2em%
+  \hbox{\leavevmode
+    \advance\beamer@leftmargin by -12bp%
+    \advance\beamer@rightmargin by -12bp%
+    \beamer@tempdim=\textwidth%
+    \advance\beamer@tempdim by \beamer@leftmargin%
+    \advance\beamer@tempdim by \beamer@rightmargin%
+    \hskip-\Gm@lmargin\hbox{%
+        \setbox\beamer@tempbox=\hbox{
+        \begin{minipage}[b]{\paperwidth}%
+          \leftskip0.1\paperwidth%
+          \rightskip0.3cm plus1fil\leavevmode
+          \usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\strut\insertframetitle\par%
+          {\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
+           \vspace{0.1em}
+          \end{minipage}
+        }%
+      \beamer@tempdim=\ht\beamer@tempbox%
+      \advance\beamer@tempdim by 2pt%
+      \begin{pgfpicture}{0pt}{0pt}{\paperwidth}{\beamer@tempdim}
+        \usebeamercolor{frametitle right}
+        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
+        \pgfusepath{clip}
+        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
+      \end{pgfpicture}
+      \hskip-\paperwidth%
+      \box\beamer@tempbox%
+      }%
+    \hskip-\Gm@rmargin%
+  }%
+  \vskip-1.5em
+}
+
+\addtobeamertemplate{frametitle}{}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,yshift=-6.5ex, xshift=5.0ex] at (current page.north west) {\includegraphics[height=1.5em]{media/cdubos-logo.png}};
+    \node[anchor=north east,yshift=-6.5ex, xshift=5ex] at (current page.north east) {\includegraphics[height=1.5em]{media/python.png}};
+  \end{tikzpicture}
+}
